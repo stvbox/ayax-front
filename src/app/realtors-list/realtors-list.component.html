@@ -1,0 +1,78 @@
+
+<div class="row">
+    <div class="col-md-4"></div>
+    <div class="col-md-4">
+
+      <div class="form bs-docs-section" >
+        <div class="form-group">
+          <label for="exampleInputName2">Фамилия</label>
+          <input [(ngModel)]="surname" type="text" class="form-control" id="exampleInputName2" placeholder="введите фамилию">
+        </div>
+        
+        <div class="form-group">
+            <div class="input-group">
+              <label for="exampleInputName2">Дата регистрации</label>
+              <input [(ngModel)]="drange" class="form-control" #drp="bsDaterangepicker" bsDaterangepicker [bsConfig]="bsConfig" >
+          </div>
+        </div>
+        
+        <div class="form-group">
+          <label for="exampleInputEmail2">Строк:</label>
+          <select class="form-control" (change)="onChange($event.target.value)" >
+            <option value="10" selected="selected" >10</option>
+            <option value="15" >15</option>
+            <option value="30" >30</option>
+            <option value="50" >50</option>
+          </select>
+        </div>
+        <button (click)="setPage(1)" type="submit" class="btn btn-default">показать</button>
+      </div>
+
+    </div>
+    <div class="col-md-4"></div>
+</div>
+
+<div>
+  <div class="container">
+      <div class="text-center">
+          <ul *ngIf="pagesCount > 0" class="pagination">
+              <li [ngClass]="{disabled:listPageNum === 1}">
+                  <a (click)="setPage(1)">First</a>
+              </li>
+              <li [ngClass]="{disabled:listPageNum === 1}">
+                  <a (click)="setPage(listPageNum - 1)">Previous</a>
+              </li>
+              <li *ngFor="let page of pages" [ngClass]="{active:listPageNum === page}">
+                  <a (click)="setPage(page)">{{page}}</a>
+              </li>
+              <li [ngClass]="{disabled:listPageNum === pagesCount}">
+                  <a (click)="setPage(listPageNum + 1)">Next</a>
+              </li>
+              <li [ngClass]="{disabled:listPageNum === pagesCount}">
+                  <a (click)="setPage(pagesCount)">Last</a>
+              </li>
+          </ul>
+      </div>
+  </div>
+</div>
+
+<table class="table table-bordered">
+  <thead>
+    <tr>
+      <th>#</th>
+      <th>Имя</th>
+      <th>Фамилия</th>
+      <th>Подразделение</th>
+      <th>Дата регистрации</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let realtor of realtors" (dblclick)="openDetail(realtor.id)" >
+      <th scope="row">{{realtor.id}}</th>
+      <td>{{realtor.name}}</td>
+      <td>{{realtor.surname}}</td>
+      <td>{{realtor.Department.name}}</td>
+      <td>{{realtor.regDate}}</td>
+    </tr>
+  </tbody>
+</table>

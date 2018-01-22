@@ -1,0 +1,49 @@
+
+<div class="row">
+  <div class="col-md-2"></div>
+  <div class="col-md-8">
+
+    <div *ngIf="item" class="panel panel-default">
+          <div class="panel-heading">Реэлтор {{item.guid}}</div>
+          <div  class="panel-body realtorm-form-body">
+
+              <input placeholder="Фамилия" class="form-control" [(ngModel)]="item.surname" />
+
+              <input placeholder="Имя" class="form-control" [(ngModel)]="item.name" />
+        
+          <div *ngIf="items.length > 0">
+            <ng-select #chosendep [allowClear]="true"
+            [(items)]="items"
+            [active]="activeDeps"
+            [disabled]="disabled"
+            (data)="refreshValue($event)"
+            (selected)="selected($event)"
+            (removed)="removed($event)"
+            (typed)="typed($event)"
+            placeholder="No city selected">
+            </ng-select>
+            </div>
+      </div>
+
+      <div class="btn-group btn-group-justified" role="group" aria-label="...">
+          <div class="btn-group" role="group">
+            <button (click)="saveItem();" type="button" class="btn btn-default">сохранить</button>
+          </div>
+          <div class="btn-group" role="group">
+            <button (click)="openModal(template)" type="button" class="btn btn-default">удалить</button>
+          </div>
+        </div>
+
+    </div>
+
+  </div>
+  <div class="col-md-2"></div>
+</div>
+
+<ng-template #template>
+  <div class="modal-body text-center">
+    <p>Do you want to confirm?</p>
+    <button type="button" class="btn btn-default" (click)="confirm()" >Yes</button>
+    <button type="button" class="btn btn-primary" (click)="decline()" >No</button>
+  </div>
+</ng-template>

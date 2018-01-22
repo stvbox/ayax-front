@@ -19,7 +19,8 @@
       "testTsconfig": "tsconfig.spec.json",
       "prefix": "app",
       "styles": [
-        "styles.css"
+        "styles.css",
+        "../node_modules/ngx-bootstrap/datepicker/bs-datepicker.css"
       ],
       "scripts": [],
       "environmentSource": "environments/environment.ts",
@@ -61,3 +62,4 @@
     "component": {}
   }
 }
+
